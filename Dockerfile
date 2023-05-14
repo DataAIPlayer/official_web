@@ -30,7 +30,7 @@ COPY --from=builder /usr/local /usr/local
 COPY --from=builder /app .
 
 # 复制 Nginx 配置文件
-COPY nginx.conf /etc/nginx/sites-available/default
+RUN envsubst '${your_domain}' < /app/nginx.conf > /etc/nginx/sites-available/default
 
 # 暴露端口
 EXPOSE 80 443
