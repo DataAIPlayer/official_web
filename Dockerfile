@@ -29,11 +29,10 @@ WORKDIR /app
 COPY --from=builder /usr/local /usr/local
 COPY --from=builder /app .
 
-# 复制 Nginx 配置文件
-RUN envsubst '${your_domain}' < /app/nginx.conf > /etc/nginx/sites-available/default
+RUN chmod +x /app/env_nginx.sh
 
 # 暴露端口
 EXPOSE 80 443
 
 # 启动 Nginx 和 Uvicorn
-CMD ["bash", "-c", "nginx && certbot --nginx --non-interactive --agree-tos -m $certbot_email -d $server_domain && uvicorn main:app --host 0.0.0.0 --port 8000"]
+CMD ["bash", "-c", "/app/env_nginx.sh && nginx && certbot --nginx --non-interactive --agree-tos -m $certbot_email -d $server_domain && uvicorn main:app --host 0.0.0.0 --port 8000"]
