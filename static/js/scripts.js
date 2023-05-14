@@ -1,6 +1,6 @@
 const textElement = document.getElementById("text");
 const textArray = [
-    "欢迎来到我们的人工智能公司...",
+    "欢迎来到AICOME...",
     "我们专注于AI技术...",
     "为您提供高质量的人工智能服务...",
 ];
