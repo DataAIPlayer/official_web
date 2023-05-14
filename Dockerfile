@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # 安装依赖
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 将应用代码复制到工作目录
 COPY . .
@@ -19,7 +19,7 @@ FROM python:3.9-slim
 # 安装 Nginx
 RUN apt-get update && \
     apt-get install -y nginx && \
-    apt-get install -y certbot certbot-nginx && \
+    apt-get install -y certbot python3-certbot-nginx && \
     rm -rf /var/lib/apt/lists/*
 
 # 将工作目录设置为 /app
